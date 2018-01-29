@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:18:19 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/28 21:35:42 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/28 21:47:44 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,4 @@ static t_swap	*init_stacks(char **tab)
 		free(args);
 	}
 	return (swap);
-}
-
-int				main(int ac, char **av)
-{
-	t_swap	*swap;
-
-	if (ac < 3)
-		return (0);
-	swap = init_stacks(av + 1);
 }
