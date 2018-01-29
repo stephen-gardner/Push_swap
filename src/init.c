@@ -6,14 +6,14 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:18:19 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/28 21:47:44 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 01:54:39 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "push_swap.h"
 
-static void		exit_if_duplicate(t_stack *stack, int n)
+static void	exit_if_duplicate(t_stack *stack, int n)
 {
 	t_num	*num;
 	int		i;
@@ -28,7 +28,7 @@ static void		exit_if_duplicate(t_stack *stack, int n)
 	}
 }
 
-static t_swap	*init_stacks(char **tab)
+t_swap		*init_stacks(char **tab)
 {
 	t_swap	*swap;
 	char	**args;
