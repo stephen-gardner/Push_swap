@@ -38,17 +38,17 @@ YELLOW = \033[1;33m
 all: $(PUSH_SWAP) $(CHECKER)
 
 $(PUSH_SWAP): $(LIBFT) $(SHARED_OBJ) $(PS_OBJ)
-	@printf "$(YELLOW)Building $@... "
+	@printf "$(YELLOW)%-35s" "Building $@... "
 	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(PS_OBJ) -o $@
 	@echo "$(GREEN)DONE$(NC)"
 
 $(CHECKER): $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o
-	@printf "$(YELLOW)Building $@... "
+	@printf "$(YELLOW)%-35s" "Building $@... "
 	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o -o $@
 	@echo "$(GREEN)DONE$(NC)"
 
 $(LIBFT):
-	@printf "$(YELLOW)Building $@... "
+	@printf "$(YELLOW)%-35s" "Building $@... "
 	@make -C libft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
