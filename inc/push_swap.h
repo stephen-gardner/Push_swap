@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 02:03:49 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 22:50:23 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef enum	e_psop
 	RRR
 }				t_psop;
 
+typedef struct	s_opmap
+{
+	char	*cmd;
+	int		op;
+}				t_opmap;
+
 typedef struct	s_num
 {
 	int				n;
@@ -50,6 +56,7 @@ typedef struct	s_swap
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_stack	*ops;
 }				t_swap;
 
 /*
@@ -67,6 +74,14 @@ t_num			*create_num(int n);
 void			remove_num(t_stack *stack, t_num *num);
 
 /*
+** load_util.c
+*/
+
+void			fatal_error(void);
+int				ps_atoi(char *str);
+char			**split(char *arg);
+
+/*
 ** ops.c
 */
 
@@ -77,10 +92,8 @@ void			op_swap(t_stack *stack);
 void			perform_op(t_swap *swap, int op);
 
 /*
-** util.c
+** solve_util.c
 */
 
-void			fatal_error(void);
-int				ps_atoi(char *str);
-char			**split(char *arg);
+t_bool			is_sorted(t_num *num, int size);
 #endif

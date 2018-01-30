@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:18:19 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 01:54:39 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:07:58 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_swap		*init_stacks(char **tab)
 
 	if (!(swap = ft_memalloc(sizeof(t_swap)))
 		|| !(swap->a = ft_memalloc(sizeof(t_stack)))
-		|| !(swap->b = ft_memalloc(sizeof(t_stack))))
+		|| !(swap->b = ft_memalloc(sizeof(t_stack)))
+		|| !(swap->ops = ft_memalloc(sizeof(t_stack))))
 		FATAL_ERROR;
 	while (*tab)
 	{
