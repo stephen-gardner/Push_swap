@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:26:35 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 23:50:07 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void			perform_op(t_swap *swap, int op);
 */
 
 void			fatal_error(void);
+t_num			*find_min(t_stack *stack);
 t_bool			is_sorted(t_num *num, int size);
 #endif
