@@ -4,23 +4,23 @@
 # SETTINGS                                                                     #
 ################################################################################
 
-NAME = libft.a
+PUSH_SWAP = push_swap
+CHECKER = checker
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-INC = -I inc
+INC = -I inc -I libft/inc
+LIBFT = libft/libft.a
 SRC_DIR = src
-SRC = \
-	ft_memalloc\
-	ft_memcpy\
-	ft_memdel\
-	ft_memset\
-	ft_stpcpy\
-	ft_strcmp\
-	ft_strlen\
-	ft_strsub\
-	get_next_line
+PS_SRC = \
+	push_swap
+SHARED_SRC = \
+	list_stack\
+	load\
+	ops\
+	util
 OBJ_DIR = $(SRC_DIR)/obj
-OBJ = $(patsubst %, $(OBJ_DIR)/%.o, $(SRC))
+SHARED_OBJ = $(patsubst %, $(OBJ_DIR)/%.o, $(SHARED_SRC))
+PS_OBJ = $(patsubst %, $(OBJ_DIR)/%.o, $(PS_SRC))
 
 ################################################################################
 # COLORS                                                                       #
@@ -29,26 +29,43 @@ OBJ = $(patsubst %, $(OBJ_DIR)/%.o, $(SRC))
 NC = \033[0m
 GREEN = \033[1;32m
 RED = \033[1;31m
+YELLOW = \033[1;33m
 
 ################################################################################
 # RULES                                                                        #
 ################################################################################
 
-all: $(NAME)
+all: $(PUSH_SWAP) $(CHECKER)
 
-$(NAME): $(OBJ)
-	@ar -rcs $@ $(OBJ)
+$(PUSH_SWAP): $(LIBFT) $(SHARED_OBJ) $(PS_OBJ)
+	@printf "$(YELLOW)Building $@... "
+	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(PS_OBJ) -o $@
 	@echo "$(GREEN)DONE$(NC)"
+
+$(CHECKER): $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o
+	@printf "$(YELLOW)Building $@... "
+	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o -o $@
+	@echo "$(GREEN)DONE$(NC)"
+
+$(LIBFT):
+	@printf "$(YELLOW)Building $@... "
+	@make -C libft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
+	@echo " > Compiling $<..."
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)
+	@make -C libft clean
+	@echo "$(RED)Object files removed$(NC)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(RED)$(NAME) removed$(NC)"
+	@make -C libft fclean
+	@rm -f $(PUSH_SWAP)
+	@echo "$(RED)$(PUSH_SWAP) removed"
+	@rm -f $(CHECKER)
+	@echo "$(CHECKER) removed$(NC)"
 
 re: fclean all
