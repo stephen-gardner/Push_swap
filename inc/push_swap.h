@@ -6,12 +6,13 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 22:50:23 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 23:07:08 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# include "ps_structs.h"
 # include "libft.h"
 
 #include <stdio.h> // REMOVE BEFORE SUBMITTING
@@ -32,32 +33,6 @@ typedef enum	e_psop
 	RRB,
 	RRR
 }				t_psop;
-
-typedef struct	s_opmap
-{
-	char	*cmd;
-	int		op;
-}				t_opmap;
-
-typedef struct	s_num
-{
-	int				n;
-	struct s_num	*prev;
-	struct s_num	*next;
-}				t_num;
-
-typedef struct	s_stack
-{
-	t_num	*head;
-	int		size;
-}				t_stack;
-
-typedef struct	s_swap
-{
-	t_stack	*a;
-	t_stack	*b;
-	t_stack	*ops;
-}				t_swap;
 
 /*
 ** init.c
