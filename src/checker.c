@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:12:12 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 22:22:33 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 23:27:53 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
-	swap = init_stacks(av + 1);
+	swap = get_swap(av + 1);
 	while ((i = get_next_line(0, &line)) > 0)
 	{
 		parse_op(swap->ops, line);

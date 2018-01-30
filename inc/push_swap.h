@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:16:40 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 23:26:35 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			remove_num(t_stack *stack, t_num *num);
 ** load.c
 */
 
-t_swap			*init_stacks(char **tab);
+t_swap			*get_swap(char **tab);
 int				ps_atoi(char *str);
 char			**split(char *arg);
 

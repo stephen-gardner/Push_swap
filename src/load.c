@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:20:23 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:16:44 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 23:26:43 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	exit_if_duplicate(t_stack *stack, int n)
 	}
 }
 
-t_swap		*init_stacks(char **tab)
+t_swap		*get_swap(char **tab)
 {
 	t_swap	*swap;
 	char	**args;
