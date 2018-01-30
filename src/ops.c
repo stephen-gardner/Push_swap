@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 00:24:42 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 02:03:51 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:25:27 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	op_push(t_stack *s1, t_stack *s2)
 
 void	op_rotate_up(t_stack *stack)
 {
-	if (s1->size < 2)
+	if (stack->size < 2)
 		return ;
 	stack->head = stack->head->next;
 }
 
 void	op_rotate_down(t_stack *stack)
 {
-	if (s1->size < 2)
+	if (stack->size < 2)
 		return ;
 	stack->head = stack->head->prev;
 }
