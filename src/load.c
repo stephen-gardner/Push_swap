@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:20:23 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:26:43 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 21:50:59 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	exit_if_duplicate(t_stack *stack, int n)
 	}
 }
 
-t_swap		*get_swap(char **tab)
+t_swap		*get_swap(char **tab, t_bool checker)
 {
 	t_swap	*swap;
 	char	**args;
@@ -41,6 +41,7 @@ t_swap		*get_swap(char **tab)
 		|| !(swap->b = ft_memalloc(sizeof(t_stack)))
 		|| !(swap->ops = ft_memalloc(sizeof(t_stack))))
 		FATAL_ERROR;
+	parse_flags(swap, tab, checker);
 	while (*tab)
 	{
 		i = 0;
@@ -67,6 +68,8 @@ int			ps_atoi(char *str)
 	sign = (*str == '-') ? -1 : 1;
 	if (*str == '+' || *str == '-')
 		str++;
+	if (!*str)
+		FATAL_ERROR;
 	while (*str)
 	{
 		if (((unsigned int)(*str - '0') > 9)

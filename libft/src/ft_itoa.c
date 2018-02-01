@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_structs.h                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 23:05:29 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 22:29:04 by sgardner         ###   ########.fr       */
+/*   Created: 2016/12/20 07:50:03 by sgardner          #+#    #+#             */
+/*   Updated: 2018/01/31 22:57:55 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_STRUCTS_H
-# define PS_STRUCTS_H
+#include "libft.h"
 
-typedef struct	s_num
+char	*ft_itoa(int n)
 {
-	int				n;
-	struct s_num	*prev;
-	struct s_num	*next;
-}				t_num;
+	char	num[12];
+	int		sign;
+	int		digit;
 
-typedef struct	s_stack
-{
-	t_num	*head;
-	int		size;
-}				t_stack;
-
-typedef struct	s_swap
-{
-	t_stack	*a;
-	t_stack	*b;
-	t_stack	*ops;
-	int		verbose;
-}				t_swap;
-#endif
+	num[11] = '\0';
+	sign = (n < 0) ? -1 : 1;
+	digit = 10;
+	if (n == 0)
+		num[digit--] = '0';
+	while (n != 0)
+	{
+		num[digit--] = (char)(((n % 10) * sign) + '0');
+		n = (n - (n % 10)) / 10;
+	}
+	if (sign < 0)
+		num[digit--] = '-';
+	return (ft_strdup(&num[++digit]));
+}

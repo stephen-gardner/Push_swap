@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 22:49:31 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 16:49:10 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 23:14:53 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,29 @@ t_bool		is_sorted(t_num *num, int size)
 		num = num->next;
 	}
 	return (TRUE);
+}
+
+void		parse_flags(t_swap *swap, char **av, t_bool checker)
+{
+	int	len;
+	int	i;
+
+	if (!checker)
+		return ;
+	len = 0;
+	while (av[len])
+		len++;
+	i = 0;
+	while (av[i])
+	{
+		if (*av[i] == '-')
+		{
+			if (*(av[i] + 1) == 'v' && !swap->verbose)
+			{
+				swap->verbose = TRUE;
+				ft_memmove(av + i, av + i + 1, sizeof(char *) * (len - i + 1));
+			}
+		}
+		i++;
+	}
 }

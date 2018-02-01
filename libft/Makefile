@@ -10,12 +10,15 @@ CFLAGS = -Wall -Werror -Wextra
 INC = -I inc
 SRC_DIR = src
 SRC = \
+	ft_itoa\
 	ft_memalloc\
 	ft_memcpy\
 	ft_memdel\
+	ft_memmove\
 	ft_memset\
 	ft_stpcpy\
 	ft_strcmp\
+	ft_strdup\
 	ft_strlen\
 	ft_strsub\
 	get_next_line

@@ -12,7 +12,8 @@ INC = -I inc -I libft/inc
 LIBFT = libft/libft.a
 SRC_DIR = src
 PS_SRC = \
-	push_swap
+	push_swap\
+	sort
 SHARED_SRC = \
 	list_stack\
 	load\
@@ -38,17 +39,17 @@ YELLOW = \033[1;33m
 all: $(PUSH_SWAP) $(CHECKER)
 
 $(PUSH_SWAP): $(LIBFT) $(SHARED_OBJ) $(PS_OBJ)
-	@printf "$(YELLOW)%-35s" "Building $@... "
+	@printf "$(YELLOW)%-35s$(NC)" "Building $@... "
 	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(PS_OBJ) -o $@
 	@echo "$(GREEN)DONE$(NC)"
 
 $(CHECKER): $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o
-	@printf "$(YELLOW)%-35s" "Building $@... "
+	@printf "$(YELLOW)%-35s$(NC)" "Building $@... "
 	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED_OBJ) $(OBJ_DIR)/checker.o -o $@
 	@echo "$(GREEN)DONE$(NC)"
 
 $(LIBFT):
-	@printf "$(YELLOW)%-35s" "Building $@... "
+	@printf "$(YELLOW)%-35s$(NC)" "Building $@... "
 	@make -C libft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

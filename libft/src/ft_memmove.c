@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_structs.h                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 23:05:29 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 22:29:04 by sgardner         ###   ########.fr       */
+/*   Created: 2016/12/16 01:15:21 by sgardner          #+#    #+#             */
+/*   Updated: 2018/01/31 21:21:23 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_STRUCTS_H
-# define PS_STRUCTS_H
+#include "libft.h"
 
-typedef struct	s_num
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	int				n;
-	struct s_num	*prev;
-	struct s_num	*next;
-}				t_num;
+	const t_byte	*src;
+	t_byte			*dst;
 
-typedef struct	s_stack
-{
-	t_num	*head;
-	int		size;
-}				t_stack;
-
-typedef struct	s_swap
-{
-	t_stack	*a;
-	t_stack	*b;
-	t_stack	*ops;
-	int		verbose;
-}				t_swap;
-#endif
+	if (s1 == s2)
+		return (s1);
+	if (s1 < s2)
+		return (ft_memcpy(s1, s2, n));
+	src = (const t_byte *)s2;
+	dst = (t_byte *)s1;
+	while (n--)
+		dst[n] = src[n];
+	return (s1);
+}

@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_structs.h                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 23:05:29 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 22:29:04 by sgardner         ###   ########.fr       */
+/*   Created: 2016/12/16 01:17:59 by sgardner          #+#    #+#             */
+/*   Updated: 2017/11/28 16:07:06 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_STRUCTS_H
-# define PS_STRUCTS_H
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_num
+char	*ft_strdup(const char *s)
 {
-	int				n;
-	struct s_num	*prev;
-	struct s_num	*next;
-}				t_num;
+	char	*dup;
+	size_t	len;
 
-typedef struct	s_stack
-{
-	t_num	*head;
-	int		size;
-}				t_stack;
-
-typedef struct	s_swap
-{
-	t_stack	*a;
-	t_stack	*b;
-	t_stack	*ops;
-	int		verbose;
-}				t_swap;
-#endif
+	len = ft_strlen(s);
+	if ((dup = (char *)malloc(len + 1)))
+	{
+		ft_memcpy(dup, s, len);
+		dup[len] = '\0';
+	}
+	return (dup);
+}

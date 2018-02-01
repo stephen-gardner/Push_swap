@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 16:40:18 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 21:25:43 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			remove_num(t_stack *stack, t_num *num);
 ** load.c
 */
 
-t_swap			*get_swap(char **tab);
+t_swap			*get_swap(char **tab, t_bool checker);
 int				ps_atoi(char *str);
 char			**split(char *arg);
 
@@ -63,10 +63,23 @@ void			op_swap(t_stack *stack);
 void			perform_op(t_swap *swap, int op);
 
 /*
+** push_swap.c
+*/
+
+void			confirm_op(t_swap *swap, int op, int n);
+
+/*
+** sort.c
+*/
+
+t_bool			rotate_sort(t_swap *swap);
+
+/*
 ** util.c
 */
 
 void			fatal_error(void);
 t_num			*find_min(t_stack *stack);
 t_bool			is_sorted(t_num *num, int size);
+void			parse_flags(t_swap *swap, char **av, t_bool checker);
 #endif
