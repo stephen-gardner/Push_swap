@@ -6,10 +6,12 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 15:05:47 by sgardner          #+#    #+#             */
-/*   Updated: 2017/12/01 19:39:51 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:55:18 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "get_next_line.h"
 
 static t_file	*get_buffer(t_file **head, int fd, t_bool destroy)

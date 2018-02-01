@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 22:49:31 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:50:21 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:49:10 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_num		*find_min(t_stack *stack)
 	return (min);
 }
 
-t_bool		is_sorted(t_num	*num, int size)
+t_bool		is_sorted(t_num *num, int size)
 {
 	int		i;
 

@@ -6,14 +6,12 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 13:06:04 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 15:53:48 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:54:37 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
 # include "libft.h"
 # define BUFF_SIZE 4096
 

@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 23:50:07 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:40:18 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h> // REMOVE BEFORE SUBMITTING
 
 # define FATAL_ERROR fatal_error()
+# define OPS "sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"
 
 typedef enum	e_psop
 {
@@ -31,7 +32,8 @@ typedef enum	e_psop
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
+	NOPS
 }				t_psop;
 
 /*
