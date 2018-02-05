@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:12:12 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 23:21:34 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/04 22:55:03 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ static int	calc_status_len(t_stack *stack)
 	while (i++ < stack->size)
 	{
 		n = num->n;
-		if (!n)
-			len++;
+		if (n < 1)
+			++len;
 		while (n)
 		{
-			len++;
+			++len;
 			n /= 10;
 		}
 		if (i < stack->size)
-			len++;
+			len += 2;
 		num = num->next;
 	}
 	return (len);
@@ -57,12 +57,10 @@ static void	print_status(char *label, t_stack *stack)
 	num = stack->head;
 	while (i++ < stack->size)
 	{
-		if (!(n = ft_itoa(num->n)))
-			FATAL_ERROR;
+		n = ps_itoa(num->n);
 		tmp = ft_stpcpy(tmp, n);
 		if (i < stack->size)
-			*tmp++ = ' ';
-		free(n);
+			tmp = ft_stpcpy(tmp, ", ");
 		num = num->next;
 	}
 	*tmp = '\n';
@@ -85,8 +83,7 @@ static void	check(t_swap *swap)
 		{
 			print_status("A: ", swap->a);
 			print_status("B: ", swap->b);
-			if (i <= swap->ops->size)
-				write(1, "\n", 1);
+			write(1, "\n", 1);
 		}
 		op = op->next;
 	}

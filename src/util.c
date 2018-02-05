@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 22:49:31 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 23:14:53 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/04 22:37:59 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,26 @@ void		parse_flags(t_swap *swap, char **av, t_bool checker)
 		}
 		i++;
 	}
+}
+
+char		*ps_itoa(int n)
+{
+	static char	num[12];
+	int			digit;
+	int			sign;
+
+	digit = 10;
+	sign = (n < 0) ? -1 : 1;
+	ft_memset(num, '\0', 11);
+	if (!n)
+		num[digit] = '0';
+	while (n)
+	{
+		num[digit] = ((n % 10) * sign) + '0';
+		if ((n /= 10) || sign < 0)
+			--digit;
+	}
+	if (sign < 0)
+		num[digit] = '-';
+	return (&num[digit]);
 }

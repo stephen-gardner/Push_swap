@@ -10,7 +10,6 @@ CFLAGS = -Wall -Werror -Wextra
 INC = -I inc
 SRC_DIR = src
 SRC = \
-	ft_itoa\
 	ft_memalloc\
 	ft_memcpy\
 	ft_memdel\
