@@ -13,6 +13,7 @@ LIBFT = libft/libft.a
 SRC_DIR = src
 PS_SRC = \
 	push_swap\
+	rotate\
 	sort
 SHARED_SRC = \
 	list_stack\

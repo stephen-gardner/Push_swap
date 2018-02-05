@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 21:25:43 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/04 22:37:07 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 #include <stdio.h> // REMOVE BEFORE SUBMITTING
 
 # define FATAL_ERROR fatal_error()
-# define OPS "sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"
+# define OPS "rr", "rrr", "ra", "rb", "rra", "rrb", "sa", "sb", "ss", "pa", "pb"
 
 typedef enum	e_psop
 {
+	RR,
+	RRR,
+	RA,
+	RB,
+	RRA,
+	RRB,
 	SA,
 	SB,
 	SS,
 	PA,
 	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
 	NOPS
 }				t_psop;
 
@@ -69,6 +69,12 @@ void			perform_op(t_swap *swap, int op);
 void			confirm_op(t_swap *swap, int op, int n);
 
 /*
+** rotate.c
+*/
+
+void			optimal_rot(t_swap *swap, t_bool (**checks)(t_swap *));
+
+/*
 ** sort.c
 */
 
@@ -82,4 +88,5 @@ void			fatal_error(void);
 t_num			*find_min(t_stack *stack);
 t_bool			is_sorted(t_num *num, int size);
 void			parse_flags(t_swap *swap, char **av, t_bool checker);
+char			*ps_itoa(int n);
 #endif
