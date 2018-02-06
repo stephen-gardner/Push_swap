@@ -6,7 +6,7 @@
 /*   By: sgardner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:29:05 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 20:16:00 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:24:10 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,20 @@ t_bool	rotate_sort(t_swap *swap)
 	else
 		confirm_op(swap, RRA, rra);
 	return (TRUE);
+}
+
+void	sort(t_swap *swap)
+{
+	rotate_sort(swap);
+	while (!is_sorted(find_min(swap->a), swap->a->size))
+	{
+		optimal_rot(swap, &b_good_push);
+		confirm_op(swap, PB, 1);
+	}
+	while (swap->b->size)
+	{
+		optimal_rot(swap, &a_good_push);
+		confirm_op(swap, PA, 1);
+	}
+	rotate_sort(swap);
 }

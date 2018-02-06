@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 01:03:51 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 21:12:53 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 14:47:11 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	swap = get_swap(av + 1, FALSE);
-	if (rotate_sort(swap))
-		report_ops(swap->ops);
+	sort(swap);
+	report_ops(swap->ops);
 	return (0);
 }

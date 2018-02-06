@@ -6,32 +6,25 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 15:25:40 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/04 22:24:50 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:35:15 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		crot(t_swap *swap, t_bool (**checks)(t_swap *), int op, int max)
+static int		crot(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
 {
 	int		count;
-	int		i;
 
 	count = 0;
-	while (count < max)
+	while (count <= max)
 	{
-		i = 0;
-		while (checks[i])
-		{
-			if (!checks[i++](swap))
-				break ;
-		}
-		if (!checks[i])
+		if (check(swap))
 			return (count);
 		perform_op(swap, op);
 		++count;
 	}
-	return (0);
+	return (-1);
 }
 
 static t_swap	*dup_swap(t_swap *swap)
@@ -60,7 +53,7 @@ static int		get_max_rot(t_swap *swap, int op)
 	return (max);
 }
 
-void			optimal_rot(t_swap *swap, t_bool (**checks)(t_swap *))
+void			optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
 {
 	t_swap	*dup;
 	int		count[6];
@@ -68,16 +61,21 @@ void			optimal_rot(t_swap *swap, t_bool (**checks)(t_swap *))
 	int		rot;
 	int		i;
 
+	ft_memset(count, 0, sizeof(int) * 6);
 	i = 0;
-	rot = 0;
 	while (i < 6)
 	{
 		dup = dup_swap(swap);
 		max = get_max_rot(dup, i);
-		if ((count[i] = crot(dup, checks, i, max)) < count[rot])
-			rot = i;
+		count[i] = crot(dup, check, i, max);
 		i++;
 	}
-	if (count[rot])
+	rot = 0;
+	while (i-- > 0)
+	{
+		if (count[rot] < 0 || (count[i] > -1 && count[i] < count[rot]))
+			rot = i;
+	}
+	if (count[rot] > 0)
 		confirm_op(swap, rot, count[rot]);
 }

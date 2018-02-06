@@ -12,6 +12,7 @@ INC = -I inc -I libft/inc
 LIBFT = libft/libft.a
 SRC_DIR = src
 PS_SRC = \
+	check\
 	push_swap\
 	rotate\
 	sort

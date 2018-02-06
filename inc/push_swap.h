@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/04 22:37:07 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 15:31:38 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ typedef enum	e_psop
 	PB,
 	NOPS
 }				t_psop;
+
+/*
+** check.c
+*/
+
+t_bool			b_good_push(t_swap *swap);
+t_bool			a_good_push(t_swap *swap);
 
 /*
 ** list_stack.c
@@ -72,13 +79,14 @@ void			confirm_op(t_swap *swap, int op, int n);
 ** rotate.c
 */
 
-void			optimal_rot(t_swap *swap, t_bool (**checks)(t_swap *));
+void			optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
 
 /*
 ** sort.c
 */
 
 t_bool			rotate_sort(t_swap *swap);
+void			sort(t_swap *swap);
 
 /*
 ** util.c
