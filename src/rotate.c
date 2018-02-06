@@ -6,25 +6,36 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 15:25:40 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/05 16:35:15 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/06 01:38:50 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		crot(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
+static t_score	score(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
 {
+	t_score	res;
 	int		count;
+	int		pushed;
 
 	count = 0;
+	res.count = -1;
+	res.pushed = 0;
 	while (count <= max)
 	{
-		if (check(swap))
-			return (count);
+		if ((pushed = check(swap)))
+		{
+			if (res.count < 0 || (pushed - count) > res.score)
+			{
+				res.count = count;
+				res.pushed = pushed;
+				res.score = pushed - count;
+			}
+		}
 		perform_op(swap, op);
 		++count;
 	}
-	return (-1);
+	return (res);
 }
 
 static t_swap	*dup_swap(t_swap *swap)
@@ -50,32 +61,33 @@ static int		get_max_rot(t_swap *swap, int op)
 		max = swap->b->size;
 	else
 		max = (swap->a->size > swap->b->size) ? swap->a->size : swap->b->size;
+	max = (max % 2) ? (max / 2) + 1 : max / 2;
 	return (max);
 }
 
-void			optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
+int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
 {
+	t_score	res[6];
 	t_swap	*dup;
-	int		count[6];
-	int		max;
-	int		rot;
+	int		op;
 	int		i;
 
-	ft_memset(count, 0, sizeof(int) * 6);
+	ft_memset(res, 0, sizeof(t_score) * 6);
 	i = 0;
 	while (i < 6)
 	{
 		dup = dup_swap(swap);
-		max = get_max_rot(dup, i);
-		count[i] = crot(dup, check, i, max);
+		res[i] = score(dup, check, i, get_max_rot(dup, i));
 		i++;
 	}
-	rot = 0;
-	while (i-- > 0)
+	op = 0;
+	while (--i >= 0)
 	{
-		if (count[rot] < 0 || (count[i] > -1 && count[i] < count[rot]))
-			rot = i;
+		if (res[i].count > 0
+			&& (res[op].count < 0 || res[i].score > res[op].score))
+			op = i;
 	}
-	if (count[rot] > 0)
-		confirm_op(swap, rot, count[rot]);
+	if (res[op].count > -1)
+		confirm_op(swap, op, res[op].count);
+	return (res[op].pushed);
 }

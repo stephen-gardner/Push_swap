@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 22:49:31 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/04 22:37:59 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 22:15:32 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool		is_sorted(t_num *num, int size)
 {
 	int		i;
 
-	if (size < 1)
+	if (size < 2)
 		return (TRUE);
 	i = 0;
 	while (++i < size)

@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 23:05:29 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/31 22:29:04 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/06 01:41:07 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,11 @@ typedef struct	s_swap
 	t_stack	*ops;
 	int		verbose;
 }				t_swap;
+
+typedef struct	s_score
+{
+	int	score;
+	int	count;
+	int	pushed;
+}				t_score;
 #endif

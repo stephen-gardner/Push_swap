@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 23:21:26 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/05 15:49:47 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 22:29:05 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_bool	b_has_order(t_swap *swap)
 	t_num	*min;
 	int		i;
 
-	if (swap->b->size < 3)
+	if (swap->b->size < 2)
 		return (TRUE);
 	i = 0;
 	min = find_min(swap->b);
@@ -31,28 +31,44 @@ static t_bool	b_has_order(t_swap *swap)
 	return (TRUE);
 }
 
-t_bool			b_good_push(t_swap *swap)
+int				b_good_push(t_swap *swap)
 {
-	if (swap->b->size < 1)
-		return (TRUE);
-	perform_op(swap, PB);
-	if (b_has_order(swap))
-	{
-		perform_op(swap, PA);
-		return (TRUE);
-	}
-	perform_op(swap, PA);
-	return (FALSE);
-}
+	int	n;
+	int	res;
 
-t_bool			a_good_push(t_swap *swap)
-{
-	perform_op(swap, PA);
-	if (is_sorted(find_min(swap->a), swap->a->size))
+	n = 0;
+	res = 0;
+	while (swap->a->size)
 	{
 		perform_op(swap, PB);
-		return (TRUE);
+		n++;
+		if (b_has_order(swap))
+			res++;
+		else
+			break ;
 	}
-	perform_op(swap, PB);
-	return (FALSE);
+	while (n-- > 0)
+		perform_op(swap, PA);
+	return (res);
+}
+
+int				a_good_push(t_swap *swap)
+{
+	int	n;
+	int	res;
+
+	n = 0;
+	res = 0;
+	while (swap->b->size)
+	{
+		perform_op(swap, PA);
+		n++;
+		if (is_sorted(find_min(swap->a), swap->a->size))
+			res++;
+		else
+			break ;
+	}
+	while (n-- > 0)
+		perform_op(swap, PB);
+	return (res);
 }

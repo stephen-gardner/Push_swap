@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/05 15:31:38 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/05 22:50:28 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PUSH_SWAP_H
 # include "ps_structs.h"
 # include "libft.h"
-
-#include <stdio.h> // REMOVE BEFORE SUBMITTING
 
 # define FATAL_ERROR fatal_error()
 # define OPS "rr", "rrr", "ra", "rb", "rra", "rrb", "sa", "sb", "ss", "pa", "pb"
@@ -40,8 +38,8 @@ typedef enum	e_psop
 ** check.c
 */
 
-t_bool			b_good_push(t_swap *swap);
-t_bool			a_good_push(t_swap *swap);
+int				b_good_push(t_swap *swap);
+int				a_good_push(t_swap *swap);
 
 /*
 ** list_stack.c
@@ -79,7 +77,7 @@ void			confirm_op(t_swap *swap, int op, int n);
 ** rotate.c
 */
 
-void			optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
+int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
 
 /*
 ** sort.c

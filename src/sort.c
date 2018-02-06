@@ -6,7 +6,7 @@
 /*   By: sgardner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:29:05 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/05 16:24:10 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/06 01:37:28 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,19 @@ t_bool	rotate_sort(t_swap *swap)
 
 void	sort(t_swap *swap)
 {
-	rotate_sort(swap);
+	int	num;
+
+	if (rotate_sort(swap))
+		return ;
 	while (!is_sorted(find_min(swap->a), swap->a->size))
 	{
-		optimal_rot(swap, &b_good_push);
-		confirm_op(swap, PB, 1);
+		num = optimal_rot(swap, &b_good_push);
+		confirm_op(swap, PB, num);
 	}
 	while (swap->b->size)
 	{
-		optimal_rot(swap, &a_good_push);
-		confirm_op(swap, PA, 1);
+		num = optimal_rot(swap, &a_good_push);
+		confirm_op(swap, PA, num);
 	}
 	rotate_sort(swap);
 }
