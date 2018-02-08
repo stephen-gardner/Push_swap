@@ -6,38 +6,72 @@
 /*   By: sgardner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:29:05 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/06 01:37:28 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 07:06:20 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool	rotate_sort(t_swap *swap)
+static void	rotate_to(t_swap *swap, t_stack *stack, t_num *dest)
 {
 	t_num	*num;
+	int		rot;
+	int		rrot;
+
+	rot = 0;
+	if (stack->head == dest)
+		return ;
+	num = stack->head;
+	while (num != dest)
+	{
+		++rot;
+		num = num->next;
+	}
+	rrot = 0;
+	num = stack->head;
+	while (num != dest)
+	{
+		++rrot;
+		num = num->prev;
+	}
+	if (rot < rrot)
+		confirm_op(swap, (stack == swap->a) ? RA : RB, rot);
+	else
+		confirm_op(swap, (stack == swap->a) ? RRA : RRB, rrot);
+}
+
+t_bool		rotate_sort(t_swap *swap)
+{
 	t_num	*min;
-	int		ra;
-	int		rra;
 
 	if (swap->b->size
 		|| !is_sorted((min = find_min(swap->a)), swap->a->size))
 		return (FALSE);
-	ra = 0;
-	num = swap->a->head;
-	while (num != min && ++ra)
-		num = num->next;
-	rra = 0;
-	num = swap->a->head;
-	while (num != min && ++rra)
-		num = num->prev;
-	if (ra < rra)
-		confirm_op(swap, RA, ra);
-	else
-		confirm_op(swap, RRA, rra);
+	rotate_to(swap, swap->a, min);
 	return (TRUE);
 }
 
-void	sort(t_swap *swap)
+void		small_sort(t_swap *swap)
+{
+	t_num	*min;
+
+	while (swap->a->size > 3)
+	{
+		rotate_to(swap, swap->a, find_min(swap->a));
+		confirm_op(swap, PB, 1);
+	}
+	min = find_min(swap->a);
+	if (is_sorted(min, swap->a->size))
+		rotate_to(swap, swap->a, min);
+	else
+	{
+		confirm_op(swap, SA, 1);
+		rotate_to(swap, swap->a, min);
+	}
+	confirm_op(swap, PA, swap->b->size);
+}
+
+void		sort(t_swap *swap)
 {
 	int	num;
 

@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 15:25:40 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/06 01:38:50 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 07:05:02 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_score	score(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
 	return (res);
 }
 
-static t_swap	*dup_swap(t_swap *swap)
+t_swap			*dup_swap(t_swap *swap)
 {
 	static t_swap	dup;
 	static t_stack	dup_a;

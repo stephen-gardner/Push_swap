@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/05 22:50:28 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 07:09:29 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void			confirm_op(t_swap *swap, int op, int n);
 ** rotate.c
 */
 
+t_swap			*dup_swap(t_swap *swap);
 int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
 
 /*
@@ -84,6 +85,7 @@ int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
 */
 
 t_bool			rotate_sort(t_swap *swap);
+void			small_sort(t_swap *swap);
 void			sort(t_swap *swap);
 
 /*
