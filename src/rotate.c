@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 15:25:40 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 07:05:02 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 22:06:46 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ static t_score	score(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
 	count = 0;
 	res.count = -1;
 	res.pushed = 0;
+	res.score = 0;
 	while (count <= max)
 	{
 		if ((pushed = check(swap)))
 		{
-			if (res.count < 0 || (pushed - count) > res.score)
+			if (res.count < 1
+				|| pushed - (count * ((op > 5) ? 2 : 1)) > res.score)
 			{
 				res.count = count;
 				res.pushed = pushed;
-				res.score = pushed - count;
+				res.score = pushed - (count * ((op > 5) ? 2 : 1));
 			}
 		}
 		perform_op(swap, op);
@@ -67,14 +69,14 @@ static int		get_max_rot(t_swap *swap, int op)
 
 int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
 {
-	t_score	res[6];
+	t_score	res[8];
 	t_swap	*dup;
 	int		op;
 	int		i;
 
-	ft_memset(res, 0, sizeof(t_score) * 6);
+	ft_memset(&res, 0, sizeof(t_score) * 8);
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
 		dup = dup_swap(swap);
 		res[i] = score(dup, check, i, get_max_rot(dup, i));

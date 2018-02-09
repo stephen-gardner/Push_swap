@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 01:03:51 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 07:10:34 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 20:55:54 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,18 @@ void		confirm_op(t_swap *swap, int op, int n)
 	while (n--)
 	{
 		perform_op(swap, op);
-		append_num(swap->ops, create_num(op));
+		if (op == DR)
+		{
+			append_num(swap->ops, create_num(RA));
+			append_num(swap->ops, create_num(RRB));
+		}
+		else if (op == DRR)
+		{
+			append_num(swap->ops, create_num(RRA));
+			append_num(swap->ops, create_num(RB));
+		}
+		else
+			append_num(swap->ops, create_num(op));
 	}
 }
 

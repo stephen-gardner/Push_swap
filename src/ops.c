@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 00:24:42 by sgardner          #+#    #+#             */
-/*   Updated: 2018/01/29 16:25:27 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 20:54:32 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	perform_op(t_swap *swap, int op)
 		op_push(swap->b, swap->a);
 	if (op == PB)
 		op_push(swap->a, swap->b);
-	if (op == RA || op == RR)
+	if (op == RA || op == RR || op == DR)
 		op_rotate_up(swap->a);
-	if (op == RB || op == RR)
+	if (op == RB || op == RR || op == DRR)
 		op_rotate_up(swap->b);
-	if (op == RRA || op == RRR)
+	if (op == RRA || op == RRR || op == DRR)
 		op_rotate_down(swap->a);
-	if (op == RRB || op == RRR)
+	if (op == RRB || op == RRR || op == DR)
 		op_rotate_down(swap->b);
 }

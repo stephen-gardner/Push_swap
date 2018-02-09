@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 07:09:29 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/08 22:09:19 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include "libft.h"
 
 # define FATAL_ERROR fatal_error()
-# define OPS "rr", "rrr", "ra", "rb", "rra", "rrb", "sa", "sb", "ss", "pa", "pb"
+# define ROTATE "rr", "rrr", "ra", "rb", "rra", "rrb", "dr", "drr"
+# define SWAP "sa", "sb", "ss"
+# define PUSH "pa", "pb"
+# define OPS ROTATE, SWAP, PUSH
 
 typedef enum	e_psop
 {
@@ -26,6 +29,8 @@ typedef enum	e_psop
 	RB,
 	RRA,
 	RRB,
+	DR,
+	DRR,
 	SA,
 	SB,
 	SS,
