@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 15:25:40 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 22:06:46 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:00:27 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_score	score(t_swap *swap, t_bool (*check)(t_swap *), int op, int max)
 	return (res);
 }
 
-t_swap			*dup_swap(t_swap *swap)
+static t_swap	*dup_swap(t_swap *swap)
 {
 	static t_swap	dup;
 	static t_stack	dup_a;
@@ -63,8 +63,7 @@ static int		get_max_rot(t_swap *swap, int op)
 		max = swap->b->size;
 	else
 		max = (swap->a->size > swap->b->size) ? swap->a->size : swap->b->size;
-	max = (max % 2) ? (max / 2) + 1 : max / 2;
-	return (max);
+	return (max / 2);
 }
 
 int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
@@ -74,7 +73,6 @@ int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
 	int		op;
 	int		i;
 
-	ft_memset(&res, 0, sizeof(t_score) * 8);
 	i = 0;
 	while (i < 8)
 	{
@@ -89,7 +87,37 @@ int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *))
 			&& (res[op].count < 0 || res[i].score > res[op].score))
 			op = i;
 	}
-	if (res[op].count > -1)
-		confirm_op(swap, op, res[op].count);
-	return (res[op].pushed);
+	if (res[op].pushed < 1)
+		return (-1);
+	else if (res[op].count > 0)
+		confirm_op(swap, op, 1);
+	return ((res[op].count > 1) ? check(swap) : res[op].pushed);
+}
+
+void			rotate_to(t_swap *swap, t_stack *stack, t_num *dest)
+{
+	t_num	*num;
+	int		rot;
+	int		rrot;
+
+	rot = 0;
+	if (stack->head == dest)
+		return ;
+	num = stack->head;
+	while (num != dest)
+	{
+		++rot;
+		num = num->next;
+	}
+	rrot = 0;
+	num = stack->head;
+	while (num != dest)
+	{
+		++rrot;
+		num = num->prev;
+	}
+	if (rot < rrot)
+		confirm_op(swap, (stack == swap->a) ? RA : RB, rot);
+	else
+		confirm_op(swap, (stack == swap->a) ? RRA : RRB, rrot);
 }

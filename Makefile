@@ -13,6 +13,7 @@ LIBFT = libft/libft.a
 SRC_DIR = src
 PS_SRC = \
 	check\
+	median\
 	push_swap\
 	rotate\
 	sort

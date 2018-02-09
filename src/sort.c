@@ -6,38 +6,60 @@
 /*   By: sgardner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 13:29:05 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 07:06:20 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/09 00:17:33 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate_to(t_swap *swap, t_stack *stack, t_num *dest)
+static void	merge_b(t_swap *swap)
 {
-	t_num	*num;
-	int		rot;
-	int		rrot;
+	int	num;
 
-	rot = 0;
-	if (stack->head == dest)
-		return ;
-	num = stack->head;
-	while (num != dest)
+	while (swap->b->size)
 	{
-		++rot;
-		num = num->next;
+		num = optimal_rot(swap, &a_good_push);
+		confirm_op(swap, PA, num);
 	}
-	rrot = 0;
-	num = stack->head;
-	while (num != dest)
+	rotate_sort(swap);
+}
+
+void		large_sort(t_swap *swap)
+{
+	t_bool	low;
+	int		median;
+	int		i;
+
+	low = TRUE;
+	while (!is_sorted(find_min(swap->a), swap->a->size))
 	{
-		++rrot;
-		num = num->prev;
+		i = 0;
+		median = find_median(swap->a);
+		while (i++ < swap->a->size)
+		{
+			if (swap->a->head->n < median)
+				confirm_op(swap, RRA, 1);
+			else
+				confirm_op(swap, PB, 1);
+		}
 	}
-	if (rot < rrot)
-		confirm_op(swap, (stack == swap->a) ? RA : RB, rot);
-	else
-		confirm_op(swap, (stack == swap->a) ? RRA : RRB, rrot);
+	merge_b(swap);
+}
+
+void		medium_sort(t_swap *swap)
+{
+	while (!is_sorted(find_min(swap->a), swap->a->size))
+	{
+		confirm_op(swap, PB, 2);
+		if (swap->b->head->n < swap->b->head->next->n)
+		{
+			if (swap->a->head->n > swap->a->head->next->n)
+				confirm_op(swap, SS, 1);
+			else
+				confirm_op(swap, SB, 1);
+		}
+	}
+	merge_b(swap);
 }
 
 t_bool		rotate_sort(t_swap *swap)
@@ -69,23 +91,4 @@ void		small_sort(t_swap *swap)
 		rotate_to(swap, swap->a, min);
 	}
 	confirm_op(swap, PA, swap->b->size);
-}
-
-void		sort(t_swap *swap)
-{
-	int	num;
-
-	if (rotate_sort(swap))
-		return ;
-	while (!is_sorted(find_min(swap->a), swap->a->size))
-	{
-		num = optimal_rot(swap, &b_good_push);
-		confirm_op(swap, PB, num);
-	}
-	while (swap->b->size)
-	{
-		num = optimal_rot(swap, &a_good_push);
-		confirm_op(swap, PA, num);
-	}
-	rotate_sort(swap);
 }

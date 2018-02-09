@@ -6,7 +6,7 @@
 /*   By: sgardner <stephenbgardner@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:53:00 by sgardner          #+#    #+#             */
-/*   Updated: 2018/02/08 22:09:19 by sgardner         ###   ########.fr       */
+/*   Updated: 2018/02/09 00:10:31 by sgardner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef enum	e_psop
 ** check.c
 */
 
-int				b_good_push(t_swap *swap);
 int				a_good_push(t_swap *swap);
 
 /*
@@ -61,6 +60,12 @@ void			remove_num(t_stack *stack, t_num *num);
 t_swap			*get_swap(char **tab, t_bool checker);
 int				ps_atoi(char *str);
 char			**split(char *arg);
+
+/*
+** median.c
+*/
+
+int				find_median(t_stack *stack);
 
 /*
 ** ops.c
@@ -82,16 +87,17 @@ void			confirm_op(t_swap *swap, int op, int n);
 ** rotate.c
 */
 
-t_swap			*dup_swap(t_swap *swap);
 int				optimal_rot(t_swap *swap, t_bool (*check)(t_swap *));
+void			rotate_to(t_swap *swap, t_stack *stack, t_num *dest);
 
 /*
 ** sort.c
 */
 
+void			large_sort(t_swap *swap);
+void			medium_sort(t_swap *swap);
 t_bool			rotate_sort(t_swap *swap);
 void			small_sort(t_swap *swap);
-void			sort(t_swap *swap);
 
 /*
 ** util.c
